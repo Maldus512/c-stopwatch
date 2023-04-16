@@ -7,7 +7,7 @@
 
 #define STOPWATCH_RESTART_WITH_NEW_PERIOD(s, period, timestamp)                                                        \
     {                                                                                                                  \
-        stopwatch_stop(s);                                                                                     \
+        stopwatch_stop(s);                                                                                             \
         stopwatch_set(s, period);                                                                                      \
         stopwatch_start(s, timestamp);                                                                                 \
     }
@@ -43,9 +43,9 @@ int  stopwatch_set(stopwatch_t *stopwatch, unsigned long period);
 void stopwatch_stop(stopwatch_t *stopwatch);
 
 stopwatch_state_t stopwatch_get_state(stopwatch_t *stopwatch);
-unsigned long     stopwatch_get_elapsed(stopwatch_t *stopwatch, unsigned long timestamp);
+unsigned long     stopwatch_get_elapsed(const stopwatch_t *stopwatch, unsigned long timestamp);
 void              stopwatch_set_elapsed(stopwatch_t *stopwatch, unsigned long elapsed);
-unsigned long     stopwatch_get_remaining(stopwatch_t *stopwatch, unsigned long timestamp);
+unsigned long     stopwatch_get_remaining(const stopwatch_t *stopwatch, unsigned long timestamp);
 unsigned long     stopwatch_get_total_time(stopwatch_t *stopwatch);
 uint8_t           stopwatch_is_done(stopwatch_t *stopwatch, unsigned long timestamp);
 

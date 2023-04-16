@@ -66,7 +66,7 @@ stopwatch_state_t stopwatch_get_state(stopwatch_t *stopwatch) {
 }
 
 
-unsigned long stopwatch_get_elapsed(stopwatch_t *stopwatch, unsigned long timestamp) {
+unsigned long stopwatch_get_elapsed(const stopwatch_t *stopwatch, unsigned long timestamp) {
     if (stopwatch->state == STOPWATCH_STATE_RUNNING) {
         return stopwatch->elapsed_time + time_interval(stopwatch->starting_time, timestamp);
     } else {
@@ -80,7 +80,7 @@ void stopwatch_set_elapsed(stopwatch_t *stopwatch, unsigned long elapsed) {
 }
 
 
-unsigned long stopwatch_get_remaining(stopwatch_t *stopwatch, unsigned long timestamp) {
+unsigned long stopwatch_get_remaining(const stopwatch_t *stopwatch, unsigned long timestamp) {
     unsigned long elapsed = stopwatch_get_elapsed(stopwatch, timestamp);
     return elapsed < stopwatch->total_time ? stopwatch->total_time - elapsed : 0;
 }
