@@ -12,13 +12,6 @@
         stopwatch_start(s, timestamp);                                                                                 \
     }
 
-#define STOPWATCH_CONTINUE_WITH_NEW_PERIOD(s, period, timestamp)                                                       \
-    {                                                                                                                  \
-        stopwatch_set(s, period);                                                                                      \
-        stopwatch_start(s, timestamp);                                                                                 \
-    }
-
-
 typedef enum {
     STOPWATCH_STATE_STOPPED = 0,
     STOPWATCH_STATE_PAUSED,
@@ -42,11 +35,11 @@ int  stopwatch_restart(stopwatch_t *stopwatch, unsigned long timestamp);
 int  stopwatch_set(stopwatch_t *stopwatch, unsigned long period);
 void stopwatch_stop(stopwatch_t *stopwatch);
 
-stopwatch_state_t stopwatch_get_state(stopwatch_t *stopwatch);
+stopwatch_state_t stopwatch_get_state(const stopwatch_t *stopwatch);
 unsigned long     stopwatch_get_elapsed(const stopwatch_t *stopwatch, unsigned long timestamp);
 void              stopwatch_set_elapsed(stopwatch_t *stopwatch, unsigned long elapsed);
 unsigned long     stopwatch_get_remaining(const stopwatch_t *stopwatch, unsigned long timestamp);
 unsigned long     stopwatch_get_total_time(stopwatch_t *stopwatch);
-uint8_t           stopwatch_is_done(stopwatch_t *stopwatch, unsigned long timestamp);
+uint8_t           stopwatch_is_done(const stopwatch_t *stopwatch, unsigned long timestamp);
 
 #endif

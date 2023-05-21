@@ -37,8 +37,10 @@ int stopwatch_pause(stopwatch_t *stopwatch, unsigned long timestamp) {
             stopwatch->state = STOPWATCH_STATE_PAUSED;
             stopwatch->elapsed_time += time_interval(stopwatch->starting_time, timestamp);
             return 0;
-        case STOPWATCH_STATE_STOPPED:     // Cannot pause a stopped stopwatch
-        case STOPWATCH_STATE_PAUSED:      // Cannot pause a paused stopwatch
+        case STOPWATCH_STATE_STOPPED:
+            stopwatch->state = STOPWATCH_STATE_PAUSED;
+            return 0;
+        case STOPWATCH_STATE_PAUSED:     // Cannot pause a paused stopwatch
             return -1;
     }
     return -1;
@@ -52,16 +54,12 @@ int stopwatch_restart(stopwatch_t *stopwatch, unsigned long timestamp) {
 
 
 int stopwatch_set(stopwatch_t *stopwatch, unsigned long period) {
-    if (stopwatch->state != STOPWATCH_STATE_STOPPED) {     // Can only set a stopped stopwatch
-        return -1;
-    } else {
-        stopwatch->total_time = period;
-        return 0;
-    }
+    stopwatch->total_time = period;
+    return 0;
 }
 
 
-stopwatch_state_t stopwatch_get_state(stopwatch_t *stopwatch) {
+stopwatch_state_t stopwatch_get_state(const stopwatch_t *stopwatch) {
     return stopwatch->state;
 }
 
@@ -91,7 +89,7 @@ unsigned long stopwatch_get_total_time(stopwatch_t *stopwatch) {
 }
 
 
-uint8_t stopwatch_is_done(stopwatch_t *stopwatch, unsigned long timestamp) {
+uint8_t stopwatch_is_done(const stopwatch_t *stopwatch, unsigned long timestamp) {
     switch (stopwatch->state) {
         case STOPWATCH_STATE_STOPPED:
             return 0;
