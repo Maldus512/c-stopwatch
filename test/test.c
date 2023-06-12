@@ -65,14 +65,14 @@ static void stopwatch_set_test(void **state) {
 
     assert_int_equal(0, stopwatch_set(&stopwatch, 1000));
     assert_int_equal(1000, stopwatch_get_total_time(&stopwatch));
-    assert_int_equal(0, stopwatch_set(&stopwatch, 2000));
-    assert_int_equal(2000, stopwatch_get_total_time(&stopwatch));
+    assert_int_equal(0, stopwatch_set(&stopwatch, 1500));
+    assert_int_equal(1500, stopwatch_get_total_time(&stopwatch));
 
     assert_int_equal(STOPWATCH_STATE_STOPPED, stopwatch_get_state(&stopwatch));
 
-    // Cannot set a started stopwatch; it has to be stopped first
+    // Can change a started stopwatch
     stopwatch_start(&stopwatch, 0);
-    assert_int_equal(-1, stopwatch_set(&stopwatch, 2000));
+    assert_int_equal(0, stopwatch_set(&stopwatch, 2000));
 
     assert_int_equal(2000, stopwatch_get_remaining(&stopwatch, 0));
     assert_int_equal(1500, stopwatch_get_remaining(&stopwatch, 500));
