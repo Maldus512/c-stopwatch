@@ -84,7 +84,13 @@ unsigned long stopwatch_get_remaining(const stopwatch_t *stopwatch, unsigned lon
 }
 
 
-unsigned long stopwatch_get_total_time(stopwatch_t *stopwatch) {
+unsigned long stopwatch_get_overtime(const stopwatch_t *stopwatch, unsigned long timestamp) {
+    long overtime = stopwatch_get_elapsed(stopwatch, timestamp) - stopwatch_get_total_time(stopwatch);
+    return overtime > 0 ? overtime : 0;
+}
+
+
+unsigned long stopwatch_get_total_time(const stopwatch_t *stopwatch) {
     return stopwatch->total_time;
 }
 

@@ -1,7 +1,5 @@
 import os
 
-sources = {}
-
 Import("c_stopwatch_env")
 
 objects = [c_stopwatch_env.Object(x) for x in Glob("./src/*.c")]

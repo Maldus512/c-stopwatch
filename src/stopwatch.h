@@ -39,7 +39,8 @@ stopwatch_state_t stopwatch_get_state(const stopwatch_t *stopwatch);
 unsigned long     stopwatch_get_elapsed(const stopwatch_t *stopwatch, unsigned long timestamp);
 void              stopwatch_set_elapsed(stopwatch_t *stopwatch, unsigned long elapsed);
 unsigned long     stopwatch_get_remaining(const stopwatch_t *stopwatch, unsigned long timestamp);
-unsigned long     stopwatch_get_total_time(stopwatch_t *stopwatch);
+unsigned long     stopwatch_get_total_time(const stopwatch_t *stopwatch);
 uint8_t           stopwatch_is_done(const stopwatch_t *stopwatch, unsigned long timestamp);
+unsigned long     stopwatch_get_overtime(const stopwatch_t *stopwatch, unsigned long timestamp);
 
 #endif
