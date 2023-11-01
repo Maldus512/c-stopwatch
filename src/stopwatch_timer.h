@@ -1,5 +1,5 @@
-#ifndef C_STATE_TIMER_H_INCLUDED
-#define C_STATE_TIMER_H_INCLUDED
+#ifndef C_STOPWATCH_TIMER_H_INCLUDED
+#define C_STOPWATCH_TIMER_H_INCLUDED
 
 #include <stdint.h>
 #include "stopwatch.h"

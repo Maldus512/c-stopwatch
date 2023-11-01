@@ -1,4 +1,4 @@
-#include "timer.h"
+#include "stopwatch_timer.h"
 
 
 int stopwatch_timer_init(stopwatch_timer_t *timer, unsigned long period, stopwatch_timer_callback_t callback,
