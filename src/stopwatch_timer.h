@@ -27,5 +27,6 @@ void    stopwatch_timer_pause(stopwatch_timer_t *timer, unsigned long timestamp)
 void    stopwatch_timer_trigger(stopwatch_timer_t *timer, void *user_ptr);
 uint8_t stopwatch_timer_manage(stopwatch_timer_t *timer, unsigned long timestamp, void *user_ptr);
 void   *stopwatch_timer_get_arg(stopwatch_timer_t *timer);
+void    stopwatch_timer_set_arg(stopwatch_timer_t *timer, void *arg);
 
 #endif

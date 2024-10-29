@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "stopwatch_timer.h"
 
 
@@ -47,12 +48,13 @@ void stopwatch_timer_trigger(stopwatch_timer_t *timer, void *user_ptr) {
 
 uint8_t stopwatch_timer_manage(stopwatch_timer_t *timer, unsigned long timestamp, void *user_ptr) {
     if (stopwatch_is_done(&timer->stopwatch, timestamp) && !timer->fired) {
-        timer->callback(timer, user_ptr);
+        timer->fired = 1;
+        if (timer->callback != NULL) {
+            timer->callback(timer, user_ptr);
+        }
         if (timer->autoreload) {
             timer->fired = 0;
             stopwatch_reset(&timer->stopwatch, timestamp);
-        } else {
-            timer->fired = 1;
         }
         return 1;
     } else {
@@ -63,4 +65,9 @@ uint8_t stopwatch_timer_manage(stopwatch_timer_t *timer, unsigned long timestamp
 
 void *stopwatch_timer_get_arg(stopwatch_timer_t *timer) {
     return timer->arg;
+}
+
+
+void stopwatch_timer_set_arg(stopwatch_timer_t *timer, void *arg) {
+    timer->arg = arg;
 }
