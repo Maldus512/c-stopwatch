@@ -47,7 +47,8 @@ void stopwatch_timer_trigger(stopwatch_timer_t *timer, void *user_ptr) {
 
 
 uint8_t stopwatch_timer_manage(stopwatch_timer_t *timer, unsigned long timestamp, void *user_ptr) {
-    if (stopwatch_is_done(&timer->stopwatch, timestamp) && !timer->fired) {
+    // Even if it's done a paused timer shouldn't be fired
+    if (!stopwatch_is_paused(&timer->stopwatch) && stopwatch_is_done(&timer->stopwatch, timestamp) && !timer->fired) {
         timer->fired = 1;
         if (timer->callback != NULL) {
             timer->callback(timer, user_ptr);
